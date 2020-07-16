@@ -1,0 +1,40 @@
+{
+    "name": "ardhan/laravel-template-metronic",
+    "description": "Fungsi untuk membuat template metronic",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ardhan Wahyu Rahmanu",
+            "email": "ardhan.matematika@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Ardhan\\LaravelTemplateMetronic\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ardhan\\LaravelTemplateMetronic\\LaravelTemplateMetronicServiceProvider"
+            ],
+            "aliases":{
+                "Page": "Ardhan\\LaravelTemplateMetronic\\Facades\\Page",
+                "El": "Ardhan\\LaravelTemplateMetronic\\Facades\\Element"
+            }
+        }
+    },
+    "require": {
+        "ardhan/laravel-simple-html": "^v0.3-alpa"
+    },
+
+    "scripts": {
+        "post-install-cmd": [
+          "@php artisan vendor:publish --tag=public --force"
+        ],
+        "post-update-cmd": [
+          "@php artisan vendor:publish --tag=public --force"
+        ]
+    }
+}
