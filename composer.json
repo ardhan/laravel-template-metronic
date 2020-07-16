@@ -24,9 +24,6 @@
             }
         }
     },
-    "require": {
-        "ardhan/laravel-simple-html": "^v0.4-alpha"
-    },
 
     "scripts": {
         "post-install-cmd": [
