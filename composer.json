@@ -26,7 +26,7 @@
         }
     },
     "require": {
-        "ardhan/laravel-simple-html": "^v0.3-alpa"
+        "ardhan/laravel-simple-html": "^v0.3-alpha"
     },
 
     "scripts": {
