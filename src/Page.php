@@ -1,7 +1,9 @@
 <?php
 namespace Ardhan\LaravelTemplateMetronic;
-use Ardhan\LaravelSimpleHtml\Facades\Element as El;
 
-class Page extends Ardhan\LaravelSimpleHtml{
-    
+class MetronicPage extends Ardhan\Page{
+    public function __construct()
+    {
+        echo test;
+    }
 }
