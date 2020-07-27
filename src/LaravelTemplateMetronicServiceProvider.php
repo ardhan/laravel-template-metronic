@@ -14,8 +14,8 @@ class LaravelTemplateMetronicServiceProvider extends ServiceProvider
     public function register()
     {
 
-        $this->app->bind('metronicpage', function() {
-            return new MetronicPage();
+        $this->app->bind('metronic', function() {
+            return new Metronic();
         });
     }
 

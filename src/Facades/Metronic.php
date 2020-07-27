@@ -1,13 +1,12 @@
 <?php
 namespace Ardhan\LaravelTemplateMetronic\Facades;
 
-
 use Illuminate\Support\Facades\Facade;
 
-class MetronicPage extends Facade
+class Metronic extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'metronicpage';
+        return 'metronic';
     }
 }

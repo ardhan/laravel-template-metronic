@@ -20,7 +20,7 @@
                 "Ardhan\\LaravelTemplateMetronic\\LaravelTemplateMetronicServiceProvider"
             ],
             "aliases":{
-                "MetronicPage": "Ardhan\\LaravelTemplateMetronic\\Facades\\MetronicPage"
+                "Metronic": "Ardhan\\LaravelTemplateMetronic\\Facades\\Metronic"
             }
         }
     },
