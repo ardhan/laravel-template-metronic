@@ -128,7 +128,7 @@ class MetronicSweetAlert
     public function __toString()
     {
         $pre_confirm_then = 'then(response => {if(!response.ok){console.log(\'tidak ok\');} return response.json();}).catch(error => {console.log(error);})';
-        $method = '{method:\'DELETE\', headers:{\'X-CSRF-TOKEN\': \''.csrf_token().'\'}}'
+        $method = '{method:\'DELETE\', headers:{\'X-CSRF-TOKEN\': \''.csrf_token().'\'}}';
 
         $swal = [
             'title' => $this->title,
