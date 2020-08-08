@@ -370,31 +370,13 @@ class MetronicPage extends Page{
      */
     public function options()
     {
+        $state = '"brand": "#5d78ff", "dark": "#282a3c", "light": "#ffffff", "primary": "#5867dd", "success": "#34bfa3", "info": "#36a3f7", "warning": "#ffb822", "danger": "#fd3995"';
         $option = 'var KTAppOptions = {';
         $option .= '"colors": {';
-        $option .= '"state": {';
-        $option .= '"brand": "#5d78ff",';
-        $option .= '"dark": "#282a3c",';
-        $option .= '"light": "#ffffff",';
-        $option .= '"primary": "#5867dd",';
-        $option .= '"success": "#34bfa3",';
-        $option .= '"info": "#36a3f7",';
-        $option .= '"warning": "#ffb822",';
-        $option .= '"danger": "#fd3995"';
-        $option .= '},';
+        $option .= '"state": {'.$state.'},';
         $option .= '"base": {';
-        $option .= '"label": [';
-        $option .= '"#c5cbe3",';
-        $option .= '"#a1a8c3",';
-        $option .= '"#3d4465",';
-        $option .= '"#3e4466"';
-        $option .= '],';
-        $option .= '"shape": [';
-        $option .= '"#f0f3ff",';
-        $option .= '"#d9dffa",';
-        $option .= '"#afb4d4",';
-        $option .= '"#646c9a"';
-        $option .= ']';
+        $option .= '"label": [ "#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466" ],';
+        $option .= '"shape": [ "#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a" ]';
         $option .= '}';
         $option .= '}';
         $option .= '};';
