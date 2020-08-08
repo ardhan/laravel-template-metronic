@@ -327,6 +327,25 @@ class MetronicPage extends Page{
      */
     public function addContentTable($content, $width)
     {
+        //mendapatkan script datatable
+        $this->script($content->getScript());
+
+        if(($this->counter() + $width) > 12){
+            $this->main_content[] = $this->row;
+            $this->row = [];
+        }
+        $this->row[] = ["content" => $content, "width" => $width];
+    }
+
+
+    /**
+     * Menambahkan konten berupa table
+     * @param Ardhan\LaravelTemplateMetronic\MetronicForm $content
+     * @param integer                                      $width    lebar konten
+     */
+    public function addContentForm($content, $width)
+    {
+        //mendapatkan script pada form untuk submit dan/atau yang lain
         $this->script($content->getScript());
 
         if(($this->counter() + $width) > 12){
