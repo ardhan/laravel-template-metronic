@@ -11,16 +11,37 @@ class MetronicForm
     private $buttons = [];
     private $title = '';
     private $action = '';
+    private $method = '';
     private $type = '';
+    private $name = '';
 
-    public function __construct($title, $action, $method)
+
+    /**
+     * Konstuksi kelas
+     * @param string $name   nama form, digunakan untuk selector script
+     * @param string $title  judul pada portlet
+     * @param string $action tujuan dari form
+     * @param string $method method form POST/GET
+     */
+    public function __construct($name, $title, $action, $method = 'POST')
     {
+        $this->name = $name;
         $this->title = $title;
         $this->action = $action;
+        $this->method = $method;
         $this->type = 'label-right';
         return $this;
     }
 
+
+    /**
+     * base input
+     * @param  string $label       caption input
+     * @param  string $value       nilai input
+     * @param  string $placeholder placeholder pada input
+     * @param  string $help        bantuan jika ada
+     * @return object
+     */
     public function input($label, $content, $placeholder = '', $help = '')
     {
         $input = El::div('', 'form-group');
@@ -40,6 +61,16 @@ class MetronicForm
         return $input;
     }
 
+
+    /**
+     * menambahkan input text pada form
+     * @param  string $name        nama input
+     * @param  string $label       caption input
+     * @param  string $value       nilai input
+     * @param  string $placeholder placeholder pada input
+     * @param  string $help        bantuan jika ada
+     * @return object
+     */
     public function inputText($name, $label, $value = '', $placeholder = '', $help = '')
     {
         $input = El::input('text', $name, $value)->cls('form-control');
@@ -49,6 +80,35 @@ class MetronicForm
         return $this;
     }
 
+
+    /**
+     * menambhakn input select pada form
+     * @param  string $name        nama input
+     * @param  string $label       caption input
+     * @param  array  $preValue    array nilai yang akan dipilih
+     * @param  string $value       nilai
+     * @param  string $placeholder placeholder
+     * @param  string $help        text untuk bantuan jika ada
+     * @return object
+     */
+    public function inputSelect($name, $label, $preValue, $value = '', $placeholder = '', $help = '')
+    {
+        $input = El::select($name);
+        foreach($preValue as $key => $value){
+            $input->option($key, $value);
+        }
+        $input->cls('form-control');
+        $this->inputs[$name] = $this->input($label, ' '.$input, $placeholder, $help);
+
+        return $this;
+    }
+
+
+    /**
+     * menambahkan tombol pada form / pada footer form
+     * @param  array $button tombol pada form, contoh: simpan, kembali
+     * @return object
+     */
     public function button($button)
     {
         $this->button[] = $button;
@@ -56,26 +116,66 @@ class MetronicForm
     }
 
 
+    /**
+     * javascript untuk memproses form
+     * javascript ini akan diambil oleh page
+     * @return string javascript
+     */
+    public function getScript()
+    {
+        $j  = '$("form[name=\''.$this->name.'\']").submit(function(e){';
+        $j .= 'e.preventDefault();';
+        $j .= 'var aaData = $( this ).serializeArray();';
+        $j .= 'console.log(aaData);';
+        $j .= '$.post("'.$this->action.'", aaData).done(function(data){';
+        $j .= 'console.log(data);var response = $.parseJSON(data); ';
+        $j .= 'swal.fire({';
+        $j .= 'position: \'top-right\',';
+        $j .= 'type: response.color,';
+        $j .= 'title: response.title,';
+        $j .= 'text: response.text,';
+        $j .= 'showConfirmButton: false,';
+        $j .= 'timer: 15000';
+        $j .= '});';
+        $j .= 'window.location.href = response.redirect;';
+        $j .= '})';
+        $j .= '});';
+        return $j;
+    }
+
+
+    /**
+     * Hasil
+     * @return string [description]
+     */
     public function __toString()
     {
+        //membuat form
         $form = El::tag('form');
+        $form->attr('name', $this->name);
         $form->cls('kt-form kt-form--label-right');
+        $form->attr('action', $this->action);
+        $form->attr('method', $this->method);
+
+        //membuat portlet untuk container form
         $container = Metronic::portlet($this->title);
 
-        foreach($this->inputs as $name => $input)
-        {
+        //memasukkan csrf token pada form
+        $form->content(El::inputhidden('_token', csrf_token()));
+
+        //memasukkan seluruh input kedalam form
+        foreach($this->inputs as $name => $input){
             $container->content($input);
         }
 
+        //memasukkan button ke dalam footer portlet
         $button = '';
-        if(count($this->button) > 0)
-        {
+        if(count($this->button) > 0){
             foreach($this->button as $b){
-                $button .= $b;
+                $button .= $b.' ';
             }
             $container->footer($button);
         }
-
 
         $form->content($container);
         return $form->__toString();
