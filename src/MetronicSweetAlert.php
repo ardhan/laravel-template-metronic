@@ -144,8 +144,15 @@ class MetronicSweetAlert
         $swalencode = str_replace('"*', '', $swalencode);
         $swalencode = str_replace('*"', '', $swalencode);
 
-        $fire_notif = 'console.log(result);Swal.fire(result.title, result.value.text, result.value.icon);';
-        $after_fire = '.then (result => { if(!result.dismiss){ datatable.reload(); '.$fire_notif.'} });';
+        $j  = 'swal.fire({';
+        $j .= 'position: \'top-right\',';
+        $j .= 'type: result.value.color,';
+        $j .= 'title: result.value.title,';
+        $j .= 'text: result.value.text,';
+        $j .= 'showConfirmButton: false,';
+        $j .= 'timer: 1500';
+        $j .= '});';
+        $after_fire = '.then (result => { if(!result.dismiss){ datatable.reload(); '.$j.'} });';
 
         $sc = 'var value= $(this).attr("value");';
         $sc .= 'swal.fire('.$swalencode.')'.$after_fire;
