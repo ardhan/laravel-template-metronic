@@ -155,14 +155,20 @@ class MetronicTable
      * @param  string $title judul kolom
      * @return object
      */
-    public function column($field, $title = '')
+    public function column($field, $title = '', $template = '')
     {
         if($title == '') $title = $field;
 
-        return $this->coldef([
+        $column = [
             'field' => $field,
             'title' => $title
-        ]);
+        ];
+
+        if($template != ''){
+            $column['template'] = $template;
+        }
+
+        return $this->coldef($column);
     }
 
 
