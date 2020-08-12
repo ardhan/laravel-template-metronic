@@ -170,9 +170,9 @@ class Metronic
      * Table
      * ---------------------------------------------------------------------------------------------
      */
-    public function Table($title)
+    public function Table($title, $server = '')
     {
-        return new MetronicTable($title);
+        return new MetronicTable($title, $server);
     }
 
     public function TableServer($data)
