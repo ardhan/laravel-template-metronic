@@ -93,10 +93,11 @@ class MetronicTable
      * konstruksi kelas
      * @param string $title
      */
-    public function __construct($title)
+    public function __construct($title, $server = '')
     {
         $this->table = new Table();
         $this->title = $title;
+        if($server != '') $this->server_data = $server;
         return $this;
     }
 
